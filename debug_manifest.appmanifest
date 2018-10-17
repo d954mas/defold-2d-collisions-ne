@@ -1,0 +1,51 @@
+# App manifest generated Thu May 24 2018 23:36:04 GMT+0300
+# Settings: Physics,Facebook,Debug
+platforms:
+    x86_64-osx:
+        context:
+            excludeLibs: ["BulletDynamics","BulletCollision","LinearMath","Box2D","physics","engine"]
+            excludeSymbols: ["FacebookExt"]
+            libs: ["engine","physics_null"]
+
+    x86_64-linux:
+        context:
+            excludeLibs: ["BulletDynamics","BulletCollision","LinearMath","Box2D","physics","engine"]
+            excludeSymbols: ["FacebookExt"]
+            libs: ["engine","physics_null"]
+
+    js-web:
+        context:
+            excludeLibs: ["BulletDynamics","BulletCollision","LinearMath","Box2D","physics","engine"]
+            excludeSymbols: ["FacebookExt"]
+            libs: ["engine","physics_null"]
+
+    x86-win32:
+        context:
+            excludeLibs: ["libBulletDynamics","libBulletCollision","libLinearMath","libBox2D","libphysics","libengine"]
+            excludeSymbols: ["FacebookExt"]
+            libs: ["libengine.lib","libphysics_null.lib"]
+
+    x86_64-win32:
+        context:
+            excludeLibs: ["libBulletDynamics","libBulletCollision","libLinearMath","libBox2D","libphysics","libengine"]
+            excludeSymbols: ["FacebookExt"]
+            libs: ["libengine.lib","libphysics_null.lib"]
+
+    armv7-android:
+        context:
+            excludeLibs: ["BulletDynamics","BulletCollision","LinearMath","Box2D","physics","engine"]
+            excludeSymbols: ["FacebookExt"]
+            libs: ["engine","physics_null"]
+
+    armv7-ios:
+        context:
+            excludeLibs: ["BulletDynamics","BulletCollision","LinearMath","Box2D","physics","engine"]
+            excludeSymbols: ["FacebookExt"]
+            libs: ["engine","physics_null"]
+
+    arm64-ios:
+        context:
+            excludeLibs: ["BulletDynamics","BulletCollision","LinearMath","Box2D","physics","engine"]
+            excludeSymbols: ["FacebookExt"]
+            libs: ["engine","physics_null"]
+

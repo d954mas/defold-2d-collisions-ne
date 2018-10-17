@@ -1,0 +1,31 @@
+local JESTER = require "Jester.jester"
+local STENCIL = require "Jester.stencil.stencil_render"
+local INPUT = require "libs.input_receiver"
+local HASHES = require "libs.hashes"
+local scenes = {
+    require "scenes.test_collisions.test_collisions",
+}
+function init(self)
+    INPUT.acquire()
+    --FIX module not found
+    local reg_scenes = {}
+    for i, v in ipairs(scenes) do
+        reg_scenes[i] = v()
+    end
+    JESTER.register(reg_scenes)
+    JESTER.show("TestCollisionsScene")
+end
+
+function update(self, dt)
+    STENCIL.update(dt)
+end
+
+function final(self)
+    INPUT.release()
+end
+
+function on_input(self, action_id, action, sender)
+    if action_id == HASHES.INPUT_TOGGLE_PROFILER and action.pressed then
+        msg.post("@system:", HASHES.INPUT_TOGGLE_PROFILER)
+    end
+end

@@ -1,0 +1,113 @@
+local MsgReceiver = require "libs.msg_receiver"
+local HASHES = require "libs.hashes"
+local DEBUG_DRAWER = require "libs.debug_drawer.debug_drawer"
+local STENCIL = require "Jester.stencil.stencil_render"
+local CONSTANTS = require "libs.constants"
+local SCREEN_HELPER = require "libs.screen_helper"
+local TAG = "render"
+
+local function update_game_projection(self)
+    local window_width = render.get_window_width()
+    local window_height = render.get_window_height()
+    local aspect = window_height/window_width
+    SCREEN_HELPER.real_width = window_width
+    SCREEN_HELPER.real_height = window_height
+    if aspect> 3/4 then
+        local new_window_height = window_width*3/4
+        local dy = (window_height-new_window_height)/2
+        self.viewport = vmath.vector4(0,dy, window_width, new_window_height)
+        window_height = new_window_height
+    elseif aspect< 1125 /2436 then
+        local new_window_width = window_height*2436/1125
+        self.viewport = vmath.vector4(0,0, new_window_width, window_height )
+        window_width = new_window_width
+    else
+        self.viewport = nil
+    end
+    SCREEN_HELPER.viewport = self.viewport
+    SCREEN_HELPER.set_screen_size(window_width, window_height)
+    self.projection = SCREEN_HELPER.count_projection()
+end
+
+local function set_view_projection(self, message_id, message)
+    self.view = message.view
+    self.projection = message.projection
+end	
+
+local function window_resized(self, message_id, message)
+    self.gui_projection = vmath.matrix4_orthographic(0, render.get_window_width(), 0, render.get_window_height(), -1, 1)
+    update_game_projection(self)
+    DEBUG_DRAWER.update_go()
+end
+
+function init(self)
+    self.tile_pred = render.predicate({"tile"})
+    self.gui_pred = render.predicate({"gui"})
+    self.text_pred = render.predicate({"text"})
+    self.particle_pred = render.predicate({"particle"})
+	
+    self.clear_color = vmath.vector4(0, 0, 0, 1)
+    self.clear_table = {[render.BUFFER_COLOR_BIT] = self.clear_color, [render.BUFFER_DEPTH_BIT] = 1, [render.BUFFER_STENCIL_BIT] = 0}
+    self.view = vmath.matrix4()
+    self.empty_view = vmath.matrix4()
+    
+    self.gui_projection = vmath.matrix4_orthographic(0, render.get_window_width(), 0, render.get_window_height(), -1, 1)
+    SCREEN_HELPER.init_count()
+    update_game_projection(self)
+
+	self.msg_receiver = MsgReceiver.new()
+	self.msg_receiver:add(HASHES.MSG_RENDER_SET_VIEW_PROJECTION, set_view_projection)
+	self.msg_receiver:add(HASHES.MSG_RENDER_WINDOW_RESIZED, window_resized)
+    STENCIL.init()
+end
+
+function update(self)
+    render.set_depth_mask(true)
+    render.set_stencil_mask(0xff)
+    render.clear(self.clear_table)
+
+    if self.viewport then
+        render.set_viewport(self.viewport.x, self.viewport.y, self.viewport.z,self.viewport.w)
+    else
+        render.set_viewport(0, 0, render.get_window_width(), render.get_window_height())
+    end
+
+    render.set_view(self.view)
+
+
+
+    render.set_depth_mask(false)
+    render.disable_state(render.STATE_DEPTH_TEST)
+    render.disable_state(render.STATE_STENCIL_TEST)
+
+    STENCIL.render()
+    STENCIL.render_to_texture_begin()
+    render.enable_state(render.STATE_BLEND)
+    render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
+    render.disable_state(render.STATE_CULL_FACE)
+
+    render.set_projection(self.projection)
+    render.draw(self.tile_pred)
+    render.draw(self.particle_pred)
+    render.draw_debug3d()
+
+    -- render GUI
+    --
+    render.set_view(self.empty_view)
+    render.set_projection(self.gui_projection)
+
+    render.enable_state(render.STATE_STENCIL_TEST)
+    render.draw(self.gui_pred)
+    render.draw(self.text_pred)
+    render.disable_state(render.STATE_STENCIL_TEST)
+
+    render.set_depth_mask(false)
+    render.draw_debug2d()
+    STENCIL.render_to_texture_end()
+    DEBUG_DRAWER.clear()
+end
+
+function on_message(self, message_id, message)
+	self.msg_receiver:on_message(self, message_id, message)
+    STENCIL.on_message(self, message_id, message)
+end

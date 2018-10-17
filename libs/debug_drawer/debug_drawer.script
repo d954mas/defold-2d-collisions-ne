@@ -1,0 +1,94 @@
+local DEBUG_DRAWER = require 'libs.debug_drawer.debug_drawer'
+local HASHES = require 'libs.hashes'
+local TAG = "DebugDrawer"
+local CONSTANTS = require "libs.constants"
+local SCREEN_HELPER = require "libs.screen_helper"
+go.property("enable", true)
+go.property("draw_test_ui", true)
+
+local function update_go()
+    go.set_scale(vmath.vector3(SCREEN_HELPER.game_width*SCREEN_HELPER.SCALE / 32, SCREEN_HELPER.game_width*SCREEN_HELPER.SCALE / 32, 1), ".")
+    go.set_position(vmath.vector3(SCREEN_HELPER.game_x_1*SCREEN_HELPER.SCALE+SCREEN_HELPER.game_width*SCREEN_HELPER.SCALE / 2, 0, 1), ".")
+end
+
+function init(self)
+    if self.enable then
+        if DEBUG_DRAWER.draw then
+            self.resource_path = go.get("#sprite", "texture0")
+            self.header = {
+                width = DEBUG_DRAWER.buffer_info.width,
+                height = DEBUG_DRAWER.buffer_info.height,
+                type = resource.TEXTURE_TYPE_2D,
+                format = resource.TEXTURE_FORMAT_RGBA,
+                num_mip_maps = 1
+            }
+            update_go()
+            resource.set_texture(self.resource_path, self.header, DEBUG_DRAWER.buffer_info.buffer)
+        else
+            self.enable = false
+            msg.post(".", HASHES.MSG_DISABLE)
+        end
+    else
+        msg.post(".", HASHES.MSG_DISABLE)
+    end
+end
+
+local function draw_aspect(aspect_h, color)
+    local width = CONSTANTS.GAME_WIDTH
+    local height = width*aspect_h
+    local x1,x2,y1,y2 = SCREEN_HELPER.count_projrection_box(width, height)
+    DEBUG_DRAWER.line(x1, y1-DEBUG_DRAWER.camera_y,x2 , y1-DEBUG_DRAWER.camera_y, 5, color)
+    DEBUG_DRAWER.line(x1, y2-DEBUG_DRAWER.camera_y,x2 , y2-DEBUG_DRAWER.camera_y, 5, color)
+    DEBUG_DRAWER.line(x1, y1-DEBUG_DRAWER.camera_y,x1 , y2-DEBUG_DRAWER.camera_y, 5, color)
+    DEBUG_DRAWER.line(x2, y1-DEBUG_DRAWER.camera_y,x2 , y2-DEBUG_DRAWER.camera_y, 5, color)
+end
+
+local function draw_test_ui()
+    DEBUG_DRAWER.line(SCREEN_HELPER.game_x_1, -DEBUG_DRAWER.camera_y, SCREEN_HELPER.game_x_2, -DEBUG_DRAWER.camera_y, 5, vmath.vector4(255, 255, 0, 10))
+    local half_height = SCREEN_HELPER.MAX_HEIGHT
+    local half_width = (SCREEN_HELPER.game_x_1 + SCREEN_HELPER.game_width/2)
+    DEBUG_DRAWER.line(half_width, half_height-DEBUG_DRAWER.camera_y, half_width, -half_height-DEBUG_DRAWER.camera_y, 5, vmath.vector4(255, 255, 0, 10))
+
+    draw_aspect(3/4, vmath.vector4(255, 0, 0, 10))
+    draw_aspect(9/16,  vmath.vector4(0, 255, 0, 10))
+    draw_aspect(1125 /2436,  vmath.vector4(0, 0, 255, 10))
+
+    --[[local x1, x2, y1, y2
+
+    local d_aspect_w = 4 / 3 - CONSTANTS.GAME_ASPECT_W
+    local d_aspect_h = 3 / 4 - CONSTANTS.GAME_ASPECT_H
+    local new_width = CONSTANTS.GAME_WIDTH + CONSTANTS.GAME_WIDTH * d_aspect_w * CONSTANTS.GAME_SCALE * CONSTANTS.GAME_ASPECT_H
+    local new_height = CONSTANTS.GAME_HEIGHT + CONSTANTS.GAME_HEIGHT * d_aspect_h * (1 - CONSTANTS.GAME_SCALE) * CONSTANTS.GAME_ASPECT_W
+    local d4x3w = new_width
+    local d4x3h = new_height / 2
+    local d_w = -(new_width - CONSTANTS.GAME_WIDTH) * CONSTANTS.GAME_MOVE_X
+    DEBUG_DRAWER.line(0, -d4x3h, d4x3w, -d4x3h, 5, vmath.vector4(255, 0, 0, 10))
+    DEBUG_DRAWER.line(0, d4x3h, d4x3w, d4x3h, 5, vmath.vector4(255, 0, 0, 10))
+    DEBUG_DRAWER.line(d_w, -d4x3h, d_w, d4x3h, 5, vmath.vector4(255, 0, 0, 10))
+    DEBUG_DRAWER.line(d4x3w + d_w, -d4x3h, d4x3w + d_w, d4x3h, 5, vmath.vector4(255, 0, 0, 10))
+
+    local d16x9_w = CONSTANTS.GAME_WIDTH
+    local d16x9_h = CONSTANTS.GAME_HEIGHT / 2
+    DEBUG_DRAWER.line(0, -d16x9_h, d16x9_w, -d16x9_h, 5, vmath.vector4(0, 255, 0, 10))
+    DEBUG_DRAWER.line(0, d16x9_h, d16x9_w, d16x9_h, 5, vmath.vector4(0, 255, 0, 10))
+    DEBUG_DRAWER.line(0, -d16x9_h, 0, d16x9_h, 5, vmath.vector4(0, 255, 0, 10))
+    DEBUG_DRAWER.line(d16x9_w, -d16x9_h, d16x9_w, d16x9_h, 5, vmath.vector4(0, 255, 0, 10))--]]
+end
+
+function update(self, dt)
+    if self.enable then
+        update_go()
+        if self.draw_test_ui then
+            draw_test_ui()
+        end
+        resource.set_texture(self.resource_path, self.header, DEBUG_DRAWER.buffer_info.buffer)
+    end
+end
+
+
+function on_message(self, message_id, message, sender)
+    if message_id == hash("update_go") then
+        update_go()
+    end
+end
+

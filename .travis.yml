@@ -1,0 +1,42 @@
+sudo: required
+
+notifications:
+  slack: 
+    rooms: 
+      - elpacoteam:F7A3qRE0VwwKeN38B7n3V12a
+    on_success: always
+    on_failure: always
+    template:
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository}@%{branch} by %{author} %{result} in %{duration} \n <https://s3.amazonaws.com/elpacoteam/d954mas/elpaco-sidescroller/%{build_number}/%{build_number}.1/all_bundles.tar.gz|all> <https://s3.amazonaws.com/elpacoteam/d954mas/elpaco-sidescroller/%{build_number}/%{build_number}.1/win32.tar.gz|win32> <https://s3.amazonaws.com/elpacoteam/d954mas/elpaco-sidescroller/%{build_number}/%{build_number}.1/web.tar.gz|web> <https://s3.amazonaws.com/elpacoteam/d954mas/elpaco-sidescroller/%{build_number}/%{build_number}.1/macOSX.tar.gz|mac> <https://s3.amazonaws.com/elpacoteam/d954mas/elpaco-sidescroller/%{build_number}/%{build_number}.1/bundles/android/Trip to Elpaco/Trip to Elpaco.apk|apk>"
+
+script:
+  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
+  - gcc --version
+
+addons:
+  artifacts:
+    paths:
+    - all_bundles.tar.gz
+    - win32.tar.gz
+    - web.tar.gz
+    - macOSX.tar.gz
+    - "bundles/android/Trip to Elpaco/Trip to Elpaco.apk"
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
+
+language: java
+
+jdk:
+  - oraclejdk8
+
+env:
+  global:
+    - DEFOLD_AUTH=foobar
+    - DEFOLD_USER=john.doe@gmail.com
+
+script:
+  - "./.travis/run.sh"

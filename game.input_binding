@@ -1,0 +1,84 @@
+key_trigger {
+  input: KEY_0
+  action: "toggle_profile"
+}
+key_trigger {
+  input: KEY_9
+  action: "toggle_physics"
+}
+key_trigger {
+  input: KEY_8
+  action: "toggle_rect"
+}
+key_trigger {
+  input: KEY_BACKSPACE
+  action: "back"
+}
+key_trigger {
+  input: KEY_P
+  action: "save_level"
+}
+key_trigger {
+  input: KEY_A
+  action: "left"
+}
+key_trigger {
+  input: KEY_D
+  action: "right"
+}
+key_trigger {
+  input: KEY_S
+  action: "down"
+}
+key_trigger {
+  input: KEY_Q
+  action: "rot_left"
+}
+key_trigger {
+  input: KEY_E
+  action: "rot_right"
+}
+key_trigger {
+  input: KEY_BACKSPACE
+  action: "delete"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_1
+  action: "touch"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_2
+  action: "right_click"
+}
+gamepad_trigger {
+  input: GAMEPAD_LSTICK_LEFT
+  action: "gamepad_stick_left"
+}
+gamepad_trigger {
+  input: GAMEPAD_RPAD_LEFT
+  action: "gamepad_x"
+}
+gamepad_trigger {
+  input: GAMEPAD_RPAD_UP
+  action: "gamepad_y"
+}
+gamepad_trigger {
+  input: GAMEPAD_RPAD_RIGHT
+  action: "gamepad_b"
+}
+gamepad_trigger {
+  input: GAMEPAD_LSTICK_RIGHT
+  action: "gamepad_stick_right"
+}
+gamepad_trigger {
+  input: GAMEPAD_LSTICK_UP
+  action: "gamepad_stick_up"
+}
+gamepad_trigger {
+  input: GAMEPAD_LSTICK_DOWN
+  action: "gamepad_stick_down"
+}
+touch_trigger {
+  input: TOUCH_MULTI
+  action: "touch_multi"
+}
