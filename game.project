@@ -25,7 +25,7 @@ type = 2D
 shared_state = 1
 
 [library]
-include_dirs = 
+include_dirs = native
 
 [native_extension]
 app_manifest = /manifest.appmanifest
