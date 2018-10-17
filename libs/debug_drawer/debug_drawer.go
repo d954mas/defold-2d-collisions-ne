@@ -23,7 +23,7 @@ embedded_components {
   type: "sprite"
   data: "tile_set: \"/builtins/graphics/particle_blob.tilesource\"\n"
   "default_animation: \"anim\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
+  "material: \"/assets/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""
   position {

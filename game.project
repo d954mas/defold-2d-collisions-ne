@@ -2,7 +2,7 @@
 title = 2d collisions
 version = 0.1
 dependencies = https://github.com/d954mas/drawpixels/archive/master.zip,https://github.com/subsoap/defos/archive/master.zip
-custom_resources = assets/levels
+custom_resources = 
 
 [bootstrap]
 main_collection = /init.collectionc

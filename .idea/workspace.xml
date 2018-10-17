@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="952f599d-6140-42b5-b760-3ad71ab290a2" name="Revert: wip" comment="update level editor" />
+    <list default="true" id="952f599d-6140-42b5-b760-3ad71ab290a2" name="Revert: wip" comment="update level editor">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jester/stencil/render/screen.fp" beforeDir="false" afterPath="$PROJECT_DIR$/Jester/stencil/render/screen.fp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.project" beforeDir="false" afterPath="$PROJECT_DIR$/game.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/ext.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/native/ext.manifest" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,26 +24,31 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="cpp" value="2" />
-          <entry key="hpp" value="2" />
+          <entry key="h" value="1" />
+          <entry key="hpp" value="3" />
           <entry key="lua" value="3" />
           <entry key="script" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="C++" value="4" />
+          <entry key="C++" value="6" />
           <entry key="lua" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cpp" value="1" />
+          <entry key="fp" value="5" />
+          <entry key="h" value="10" />
+          <entry key="hpp" value="5" />
           <entry key="lua" value="64" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="C++" value="1" />
+          <entry key="C++" value="16" />
+          <entry key="PLAIN_TEXT" value="5" />
           <entry key="lua" value="64" />
         </counts>
       </usages-collector>
@@ -49,10 +59,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scenes/test_collisions/test_collisions.lua">
+        <entry file="file://$PROJECT_DIR$/native/include/spatial.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="16" column="97" selection-start-line="16" selection-start-column="97" selection-end-line="16" selection-end-column="97" />
+            <state relative-caret-position="168">
+              <caret line="648" column="10" selection-start-line="648" selection-start-column="10" selection-end-line="648" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -68,9 +78,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dt</find>
-      <find>delay</find>
-      <find>velocity</find>
       <find>on_death</find>
       <find>z</find>
       <find>self.level_en</find>
@@ -98,6 +105,9 @@
       <find>Shape_dispose</find>
       <find>World_get_shapes_size</find>
       <find>self.shapes</find>
+      <find>unordered_ma</find>
+      <find>abs</find>
+      <find>light</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -114,8 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scenes/game/scripts/gun_script.lua" />
-        <option value="$PROJECT_DIR$/scenes/game/utils/animations.lua" />
         <option value="$PROJECT_DIR$/scenes/game/scripts/take_damage.lua" />
         <option value="$PROJECT_DIR$/render/my.render_script" />
         <option value="$PROJECT_DIR$/scenes/game/scripts/death_animation_script.lua" />
@@ -165,6 +173,8 @@
         <option value="$PROJECT_DIR$/init_controller.script" />
         <option value="$PROJECT_DIR$/native/src/binding.cpp" />
         <option value="$PROJECT_DIR$/scenes/test_collisions/test_collisions.lua" />
+        <option value="$PROJECT_DIR$/native/include/sparsepp/spp_utils.h" />
+        <option value="$PROJECT_DIR$/native/include/spatial.hpp" />
       </list>
     </option>
   </component>
@@ -180,11 +190,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="142" />
-    <option name="y" value="85" />
-    <option name="width" value="1400" />
-    <option name="height" value="955" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="151" />
+    <option name="width" value="1426" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -230,7 +239,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539807630136" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539808645216" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -320,7 +329,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527545553459</updated>
-      <workItem from="1539804174701" duration="3006000" />
+      <workItem from="1539804174701" duration="4298000" />
     </task>
     <task id="LOCAL-00001" summary="replace jester vs jester2">
       <created>1530656172134</created>
@@ -425,7 +434,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3006000" />
+    <option name="totallyTimeSpent" value="4298000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -437,11 +446,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1934" height="1054" extended-state="6" />
+    <frame x="151" y="0" width="1426" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Learn" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18636848" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25547445" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -458,9 +467,9 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.33406836" />
       <window_info anchor="bottom" id="LuaCheck" order="7" sideWeight="0.49935064" weight="0.32524806" />
       <window_info anchor="bottom" id="Inspection Results" order="8" weight="0.32899022" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4935065" weight="0.44191095" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4935065" visible="true" weight="0.44787234" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5037274" side_tool="true" weight="0.32247558" />
-      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.4834931" visible="true" weight="0.3249476" />
+      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.4834931" weight="0.3249476" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -590,13 +599,6 @@
     <find-history />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scenes/game_copy/gui/game_gui.gui_script">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="92" column="3" lean-forward="true" selection-start-line="63" selection-end-line="92" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scenes/game/scripts/drop_bonus.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
@@ -889,17 +891,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/native/include/spatial.hpp">
+    <entry file="file://$PROJECT_DIR$/scenes/test_collisions/test_collisions.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="910" column="55" selection-start-line="910" selection-start-column="34" selection-end-line="910" selection-end-column="55" />
+        <state relative-caret-position="320">
+          <caret line="26" column="24" lean-forward="true" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scenes/test_collisions/test_collisions.lua">
+    <entry file="file://$PROJECT_DIR$/native/include/sparsepp/spp_utils.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="16" column="97" selection-start-line="16" selection-start-column="97" selection-end-line="16" selection-end-column="97" />
+        <state relative-caret-position="209">
+          <caret line="85" column="11" lean-forward="true" selection-start-line="85" selection-start-column="11" selection-end-line="85" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/native/include/spatial.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="648" column="10" selection-start-line="648" selection-start-column="10" selection-end-line="648" selection-end-column="10" />
         </state>
       </provider>
     </entry>
